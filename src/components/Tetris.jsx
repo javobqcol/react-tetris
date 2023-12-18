@@ -22,7 +22,6 @@ export const Tetris = () => {
   const [ stage, setStage, rowsCleared ] = useStage(player, resetPlayer);
   const [ score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
 
-  console.log('re-render');
 
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -31,7 +30,6 @@ export const Tetris = () => {
   }
 
   const startGame = () => {
-    console.log("test")
     // Reset everything
     setStage(createStage());
     setDropTime(1000)
@@ -52,7 +50,6 @@ export const Tetris = () => {
     } else {
       // Game Over
       if (player.pos.y < 1) {
-        console.log("GAME OVER!!!");
         setGameOver(true);
         setDropTime(null);
       }
@@ -63,13 +60,11 @@ export const Tetris = () => {
   const keyUp = ({ keyCode}) => {
     if (!gameOver){
       if (keyCode === 40){
-        console.log("interval: on")
         setDropTime(1000 / (level + 1)+ 200)
       }
     }
   }
   const dropPlayer = () => {
-    console.log("interval: off")
     setDropTime(null)
     drop();
   }
